@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+</head>
+<style>
+    table {
+        width: 100%;
+    }
+    
+    th,
+    td {
+        text-align: left;
+        padding: 28x;
+        border: 1px solid black;
+    }
+    
+    input,
+    label {
+        margin-left: 20px;
+        position: relative;
+    }
+    
+    span {
+        color: red;
+        position: absolute;
+        margin-left: 200px;
+        right: auto;
+    }
+    
+    .modal-content {
+        row-gap: 8px;
+    }
+    
+    #modal {
+        width: 40vw;
+        position: absolute;
+        top: 5px;
+        left: 30%;
+        height: 45vw;
+    }
+</style>
+
+<body>
+    <div class="col-12">
+        <img src="/img/HEADER.PNG" alt="" width="100%" ; height="300px">
+    </div>
+    <div class="container">
+        <div class="row">
+            <nav class="navbar">
+                <ul class="nav nav-navbar nav-expand">
+                    <li class="nav-item"> <a href="#" class="nav-link">Đăng nhập</a></li>
+                    <li class="nav-item"> <a href="#" class="nav-link" id="btnDK">Đăng kí</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row">
+            <table class="table-bordered table-light table-primary table-hover table table-striped" id="tbDanhSach">
+                <tr>
+                    <th>STT</th>
+                    <th>Mã thành viên</th>
+                    <th>Họ tên</th>
+                    <th>Lớp</th>
+                    <th>Ngày tham gia</th>
+                    <th>Điện thoại</th>
+                    <th>Email</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>K16-123456789</td>
+                    <td>Tran Thanh Kha</td>
+                    <td>DHKTPM16ATT</td>
+                    <td>22/02/2022</td>
+                    <td>0909-123-123</td>
+                    <td>thanhkha@iuh.edu.vn</td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-4 col-md-4">
+                <h6>SVTH:.............</h6>
+            </div>
+            <div class="col-4 col-md-4">
+                <h6>Mã số sinh viên:.............</h6>
+            </div>
+            <div class="col-4 col-md-4">
+                <h6>Lớp:DHKTPM16....</h6>
+            </div>
+        </div>
+    </div>
+    <div class="modal bg-white shadow-lg" id="modal">
+        <div class="modal-header">
+            <h2>THÔNG TIN CÁ NHÂN</h2>
+            <div class="btn btn-close" id="nutdong"></div>
+        </div>
+        <div class="modal-content p-2">
+            <div class="row">
+                <label for="" class="col-3">Mã thành viên</label>
+                <div class="col-6">
+                    <input type="text" name="matv" id="txtma" class="form-control" placeholder="K16-123456789">
+                </div>
+                <span id="tbma" class="col-3">*</span>
+            </div>
+            <div class="row">
+                <label for="" class="col-3">Họ tên</label>
+                <div class="col-6">
+                    <input type="text" name="hoten" id="txtHT" class="form-control" placeholder="Họ tên: Tran Anh Dung">
+                </div>
+                <span id="tbHT" class="col-3">*</span>
+            </div>
+            <div class="row">
+                <label for="" class="col-3">Lớp</label>
+                <div class="col-6">
+                    <input type="text" name="lop" id="lop" class="form-control" placeholder="Lớp: DHKTPM16ATT">
+                </div>
+                <span id="tblop" class="col-3">*</span>
+            </div>
+            <div class="row">
+                <label for="" class="col-3">Ngày tham gia</label>
+                <div class="col-6">
+                    <input type="text" name="ngaythamgia" id="ngaythamgia" class="form-control" placeholder="mm/dd/yyyy">
+                </div>
+                <span id="tbngay" class="col-3">*</span>
+            </div>
+            <div class="row">
+                <label for="" class="col-3">Số điện thoại</label>
+                <div class="col-6">
+                    <input type="text" name="sdt" id="sdt" class="form-control" placeholder="SDT: 0xxx-xxx-xxx">
+                </div>
+                <span id="tbsdt" class="col-3">*</span>
+            </div>
+            <div class="row">
+                <label for="" class="col-3">Email</label>
+                <div class="col-6">
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Email: xxxxxx@iuh.edu.vn">
+                </div>
+                <span id="tbemail" class="col-3">*</span>
+            </div>
+            <div class="row">
+                <button class="btn btn-success col-12" id="submit">Lưu</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    var modal = document.getElementById("modal");
+    const btnDK = document.getElementById("btnDK");
+    const nutdong = document.getElementById("nutdong");
+
+
+
+    btnDK.addEventListener("click", function() {
+        modal.style.display = "block";
+    })
+    nutdong.addEventListener("click", function() {
+        modal.style.display = "none";
+    })
+
+    var stt = 0;
+    var submit = document.getElementById("submit");
+    var table = document.getElementById("table");
+    submit.addEventListener("click", function() {
+        var txtma = document.getElementById("txtma").value;
+        var txtHT = document.getElementById("txtHT").value;
+        var lop = document.getElementById("lop").value;
+        var ngaythamgia = document.getElementById("ngaythamgia").value;
+        var sdt = document.getElementById("sdt").value;
+        var email = document.getElementById("email").value;
+
+        var regMa = /^K16-\d{9}$/;
+        var regHT = /^([A-Z]{1}[a-z]+)(\s[A-z]{1}[a-z]*)+$/;
+        var reglop = /^[A-Z0-9]{11}$/;
+        var regsdt = /^0[0-9]{9}$/;
+        var regemail = /^[\w-\.]+@iuh.edu.vn/g;
+
+        if (txtma === "" || txtHT === "" || lop === "" || sdt === "" || email === "" || !(regMa).test(txtma) || !(regHT).test(txtHT) || !(reglop).test(lop) || !(regsdt).test(sdt) || !(regemail).test(email)) {
+            alert("Kiểm tra lại thông tin nhập")
+            if (txtma === "")
+                tbma.innerText = "Nhập mã";
+            else if (!(regMa).test(txtma))
+                tbma.innerText = "Mã định dạng sai";
+            else
+                tbma.innerText = "";
+
+            if (txtHT === "")
+                tbHT.innerText = "Nhập tên";
+            else if (!(regHT).test(txtHT))
+                tbHT.innerText = "Tên định dạng sai";
+            else
+                tbHT.innerText = "";
+
+
+            if (lop === "")
+                tblop.innerText = "Nhập lớp";
+            else if (!(reglop).test(lop))
+                tblop.innerText = "Lớp định dạng sai";
+            else
+                tblop.innerText = "";
+
+            if (sdt === "")
+                tbsdt.innerText = "Nhập SDT";
+            else if (!(regsdt).test(sdt))
+                tbsdt.innerText = "SDT định dạng sai";
+            else
+                tbsdt.innerText = "";
+
+            if (email === "")
+                tbemail.innerText = "Nhập email";
+            else if (!(regemail).test(email))
+                tbemail.innerText = "Email sai";
+            else
+                tbemail.innerText = "";
+        } else {
+            stt++;
+            let html = `
+    <tr>
+                    <th>${stt +1}</th>
+                    <th>${txtma}</th>
+                    <th>${txtHT}</th>
+                    <th>${lop}</th>
+                    <th>${ngaythamgia}</th>
+                    <th>${sdt}</th>
+                    <th>${email}</th>
+                </tr>
+                `;
+            let row = tbDanhSach.insertRow();
+            row.innerHTML = html;
+            modal.style.display = "none";
+            resetForm();
+
+        }
+        const resetForm = () => {
+            document.getElementById("txtma").value = "";
+            document.getElementById("txtHT").value = "";
+            document.getElementById("lop").value = "";
+            document.getElementById("sdt").value = "";
+            document.getElementById("email").value = "";
+
+            document.getElementById("tbma").innerText = "*";
+            document.getElementById("tbHT").innerText = "*";
+            document.getElementById("tblop").innerText = "*";
+            document.getElementById("tbsdt").innerText = "*";
+            document.getElementById("tbemail").innerText = "*";
+
+        }
+    })
+</script>
+
+
+</html>
